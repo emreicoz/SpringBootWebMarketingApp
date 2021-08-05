@@ -2,6 +2,7 @@ package com.example.springbootwebmarketingapp.service;
 
 import com.example.springbootwebmarketingapp.model.Item;
 import com.example.springbootwebmarketingapp.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Service
 public class ItemService implements IItemService {
 
-
+    @Autowired
     private ItemRepository itemRepository;
 
     @Override
