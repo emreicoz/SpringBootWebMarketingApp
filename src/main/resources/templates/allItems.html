@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+</head>
+<body>
+<div>
+    <h2>Items</h2>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Item adı</th>
+            <th>Fiyatı</th>
+        </tr>
+        <tr th:each="i : ${itemList}">
+            <td th:text="${i.id}">Id</td>
+            <td th:text="${i.name}">Başlık</td>
+            <td th:text="${i.price}">Alıntı Sayısı</td>
+        </tr>
+    </table>
+    <p>
+        <a href="/home">Ana sayfa</a>
+    </p>
+</div>
+</body>
+</html>

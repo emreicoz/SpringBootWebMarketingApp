@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>Yeni Item ekle</h2>
+    <form th:action="@{addItem}" th:object="${item}" method="POST">
+        <table>
+            <tr>
+                <td>Ürün Adı</td>
+                <td><input type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Fiyatı</td>
+                <td><input type="text" th:field="*{price}"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Kaydet"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

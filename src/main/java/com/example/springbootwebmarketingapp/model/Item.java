@@ -10,12 +10,12 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String price;
+    private Integer price;
 
     public Item() {
     }
 
-    public Item(Long id, String name, String price) {
+    public Item(Long id, String name, Integer price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -37,11 +37,11 @@ public class Item {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }
