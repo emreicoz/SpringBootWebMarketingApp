@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
 </head>
 <body>
-<div>
-    <h2>Yeni Item ekle</h2>
+<div class="container w-25 float-left">
+    <h2>Yeni ürün ekle</h2>
     <form th:action="@{addItem}" th:object="${item}" method="POST">
-        <table>
-            <tr>
-                <td>Ürün Adı</td>
-                <td><input type="text" th:field="*{name}"/></td>
-            </tr>
-            <tr>
-                <td>Fiyatı</td>
-                <td><input type="text" th:field="*{price}"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Kaydet"/></td>
-                <td></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="itemName">Ürün Adı</label>
+            <input type="text" th:field="*{name}" class="form-control" id="itemName" placeholder="Ürün adı giriniz">
+        </div>
+        <div class="form-group">
+            <label for="itemPrice">Password</label>
+            <input type="text" th:field="*{price}" class="form-control" id="itemPrice" placeholder="Ürün fiyatı girin">
+        </div>
+        <button type="submit" class="btn btn-primary">Ekle</button>
     </form>
 </div>
 </body>

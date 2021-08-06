@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Items</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-<div>
-    <h2>Items</h2>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Item adı</th>
-            <th>Fiyatı</th>
-        </tr>
-        <tr th:each="i : ${itemList}">
-            <td th:text="${i.id}">Id</td>
-            <td th:text="${i.name}">Başlık</td>
-            <td th:text="${i.price}">Alıntı Sayısı</td>
-        </tr>
-    </table>
+<div class="container-fluid">
+    <div class="align-content-center">
+        <br>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Fiyatı</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i : ${itemList}">
+                <td th:text="${i.id}">Id</td>
+                <td th:text="${i.name}">Başlık</td>
+                <td th:text="${i.price}">Alıntı Sayısı</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <p>
         <a href="/home">Ana sayfa</a>
     </p>

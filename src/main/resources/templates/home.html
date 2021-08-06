@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-<h1>This is our home page</h1>
-<a href="allItems">Tüm ürünlere ulaşmak için tıklayınız.</a>
-<br>
-<a href="newItem">Yeni ürün eklemek için tıklayınız</a>
-<br>
-<table>
-    <thead>Market</thead>
-    <tbody>
-    <tr>
-        <th>Deneme</th>
-        <th>Tablosu</th>
-    </tr>
-    <tr>
-        <td>item1</td>
-        <td>item2</td>
-        <td>item3</td>
-        <td>item4</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container-fluid">
+    <h1>This is our home page</h1>
+    <div class="container-fluid">
+        <a href="allItems" class="btn btn-outline-primary">Tüm ürünler</a>
+    </div>
+    <br>
+    <div class="container-fluid">
+        <a href="newItem" class="btn btn-outline-primary">Yeni ürün ekle</a>
+    </div>
+    <br>
+</div>
 </body>
 </html>
