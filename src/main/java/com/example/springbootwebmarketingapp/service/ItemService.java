@@ -28,4 +28,9 @@ public class ItemService implements IItemService {
         Long id = itemRepository.save(item).getId();
         return id;
     }
+
+    @Override
+    public void delete(Long id) {
+        itemRepository.deleteById(id);
+    }
 }
