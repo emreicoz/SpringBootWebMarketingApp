@@ -9,25 +9,39 @@
 <div class="container-fluid">
     <div class="align-content-center">
         <br>
+        <h3 class="modal-header">Tüm Ürünler</h3>
+        <br>
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Ürün Adı</th>
-                <th scope="col">Fiyatı</th>
+                <th scope="col">Ürün Ad</th>
+                <th scope="col">Renk</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col" colspan="2"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="i : ${itemList}">
-                <td th:text="${i.id}">Id</td>
-                <td th:text="${i.name}">Başlık</td>
-                <td th:text="${i.price}">Alıntı Sayısı</td>
+            <tr th:each="item : ${itemList}">
+                <td th:text="${item.id}">Id</td>
+                <td th:text="${item.name}">Adı</td>
+                <td th:text="${item.color}">Rengi</td>
+                <td th:text="${item.price}">Fiyatı</td>
+                <td><a class="btn btn-outline-info" th:href="@{/itemDetail/{id}(id=${item.id})}" th:object="${itemm}">Detay</a>
+                </td>
+                <td>
+                    <form th:method="delete" th:action="@{/deleteItem(itemId=${item.id})}">
+                        <button class="btn btn-outline-danger"><img width="30" height="30"
+                                                                    src="https://icon-library.com/images/delete-icon/delete-icon-14.jpg"/>
+                        </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
     <p>
-        <a href="/home">Ana sayfa</a>
+        <a class="btn btn-outline-dark" href="/home">Ana sayfa</a>
     </p>
 </div>
 </body>

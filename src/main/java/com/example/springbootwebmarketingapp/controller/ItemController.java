@@ -29,18 +29,31 @@ public class ItemController {
         return "allItems";
     }
 
+    @GetMapping("itemDetail/{id}")
+    public String itemDetail(Model model, @ModelAttribute("itemm") Item i) {
+        Item item = itemService.getSingle(i.getId());
+        model.addAttribute("item", item);
+        return "itemDetail";
+    }
+
     @GetMapping("newItem")
-    public String newCategory(Model model) {
+    public String newItem(Model model) {
         model.addAttribute("item", new Item());
         return "newItem";
     }
 
     @PostMapping("/addItem")
-    public String addCategory(Model model, @ModelAttribute("item") Item c) {
+    public String addItem(Model model, @ModelAttribute("item") Item c) {
         // TODO Exception durumunu kontrol edip bir HTTP Status mesajı vermeyi
         // deneyebiliriz
         itemService.add(c);
         return "redirect:/allItems/";
+    }
+
+    @PostMapping("/deleteItem")
+    public String deleteItem(Model model, @ModelAttribute("itemId") Long itemId) {
+        itemService.delete(itemId);
+        return "redirect:/allItems";
     }
 
 }
