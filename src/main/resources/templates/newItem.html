@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Yeni Ürün Ekle</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
-<div class="container w-25 float-left">
-    <br>
+<div class="container w-25 bg-light p-3 mt-3 border">
     <h4 class="modal-header">Yeni Ürün Ekle</h4>
     <form th:action="@{addItem}" th:object="${item}" method="POST">
         <div class="form-group">
@@ -17,13 +17,17 @@
         </div>
         <div class="form-group">
             <label for="itemColor">Renk</label>
-            <input type="text" th:field="*{color}" class="form-control" id="itemColor" placeholder="Ürün rengini girin">
+            <input type="text" th:field="*{color}" class="form-control" id="itemColor"
+                   placeholder="Ürün rengini giriniz">
         </div>
         <div class="form-group">
             <label for="itemPrice">Fiyat</label>
-            <input type="text" th:field="*{price}" class="form-control" id="itemPrice" placeholder="Ürün fiyatı girin">
+            <input type="text" th:field="*{price}" class="form-control" id="itemPrice"
+                   placeholder="Ürün fiyatı giriniz">
         </div>
-        <button type="submit" class="btn btn-primary">Ekle</button>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary shadow">Ekle</button>
+        </div>
     </form>
 </div>
 </body>

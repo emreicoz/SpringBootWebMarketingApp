@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -47,6 +48,12 @@ public class ItemController {
         // TODO Exception durumunu kontrol edip bir HTTP Status mesajı vermeyi
         // deneyebiliriz
         itemService.add(c);
+        return "redirect:/allItems/";
+    }
+
+    @RequestMapping("/updateItem/{id}")
+    public String updateItem(Model model, @ModelAttribute("item") Item i) {
+        itemService.update(i);
         return "redirect:/allItems/";
     }
 

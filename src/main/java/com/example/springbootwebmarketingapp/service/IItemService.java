@@ -9,6 +9,8 @@ public interface IItemService {
 
     Long add(Item item);
 
+    void update(Item item);
+
     void delete(Long id);
 
     Item getSingle(Long id);
