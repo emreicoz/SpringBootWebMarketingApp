@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <title th:text="${item.name}">Title</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container w-25 float-left ">
-    <div class="row form-group">
-        <label>Ürün Ad: </label>
-        <label th:text="${item.name}">Ad</label>
-    </div>
-    <div class="row form-group">
-        <label>Ürün Renk : </label>
-        <label th:text="${item.color}">Renk</label>
-    </div>
-    <div class="row form-group">
-        <label>Ürün Fiyat: </label>
-        <label th:text="${item.price}">Fiyat</label>
-    </div>
+<div class="container w-25 bg-light border mt-4 p-4">
+    <form th:action="@{/updateItem/{id}(id=${item.id})}" th:object="${item}" method="POST">
+        <div class="form-group">
+            <label for="itemName">Ürün Ad</label>
+            <input type="text" th:field="${item.name}" class="form-control" id="itemName"/>
+        </div>
+        <div class="form-group">
+            <label for="itemColor">Renk</label>
+            <input type="text" th:field="${item.color}" class="form-control" id="itemColor"/>
+        </div>
+        <div class="form-group">
+            <label for="itemPrice">Fiyat</label>
+            <input type="text" th:field="${item.price}" class="form-control" id="itemPrice"/>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-outline-primary shadow mt-2">Kaydet</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

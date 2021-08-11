@@ -30,6 +30,11 @@ public class ItemService implements IItemService {
     }
 
     @Override
+    public void update(Item item) {
+        itemRepository.save(item);
+    }
+
+    @Override
     public void delete(Long id) {
         itemRepository.deleteById(id);
     }
