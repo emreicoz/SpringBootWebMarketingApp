@@ -31,7 +31,7 @@ public class ItemController {
     }
 
     @GetMapping("itemDetail/{id}")
-    public String itemDetail(Model model, @ModelAttribute("itemm") Item i) {
+    public String itemDetail(Model model, @ModelAttribute("") Item i) {
         Item item = itemService.getSingle(i.getId());
         model.addAttribute("item", item);
         return "itemDetail";
@@ -45,8 +45,6 @@ public class ItemController {
 
     @PostMapping("/addItem")
     public String addItem(Model model, @ModelAttribute("item") Item c) {
-        // TODO Exception durumunu kontrol edip bir HTTP Status mesajı vermeyi
-        // deneyebiliriz
         itemService.add(c);
         return "redirect:/allItems/";
     }

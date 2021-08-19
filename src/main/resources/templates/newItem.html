@@ -5,12 +5,24 @@
     <title>Yeni Ürün Ekle</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+        .image-preview {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="container w-25 bg-light p-3 mt-3 border">
     <h4 class="modal-header">Yeni Ürün Ekle</h4>
     <form th:action="@{addItem}" th:object="${item}" method="POST">
+        <div class="form-group">
+            <label for="fileImage">Resim</label>
+            <input type="file" th:field="*{image}" name="fileImage" id="fileImage">
+        </div>
+        <div class="form-group">
+            <img class="image-preview" id="itemImage" alt="itemImage">
+        </div>
         <div class="form-group">
             <label for="itemName">Ürün Ad</label>
             <input type="text" th:field="*{name}" class="form-control" id="itemName" placeholder="Ürün adı giriniz">
@@ -30,5 +42,25 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    const chooseFile = document.getElementById("fileImage");
+    const previewImage = document.getElementById("itemImage");
+
+    chooseFile.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                previewImage.setAttribute("src", this.result);
+            });
+            reader.readAsDataURL(file);
+
+        }
+
+    })
+</script>
 </body>
 </html>
