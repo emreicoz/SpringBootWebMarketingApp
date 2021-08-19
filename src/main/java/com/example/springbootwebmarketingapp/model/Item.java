@@ -9,6 +9,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String image;
     private String name;
     private String color;
     private Integer price;
@@ -16,8 +17,9 @@ public class Item {
     public Item() {
     }
 
-    public Item(Long id, String name, String color, Integer price) {
+    public Item(Long id, String image, String name, String color, Integer price) {
         this.id = id;
+        this.image = image;
         this.name = name;
         this.color = color;
         this.price = price;
@@ -29,6 +31,14 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

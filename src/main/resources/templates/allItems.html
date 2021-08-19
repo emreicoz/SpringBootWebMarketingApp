@@ -20,6 +20,7 @@
         <thead>
         <tr>
             <th scope="col">Id</th>
+            <th scope="col">Resim</th>
             <th scope="col">Ürün Ad</th>
             <th scope="col">Renk</th>
             <th scope="col">Deneme</th>
@@ -29,6 +30,7 @@
             <tbody>
             <tr th:each="item : ${itemList}">
                 <td th:text="${item.id}">Id</td>
+                <td th:text="${item.image}"><img th:src="https://www.w3schools.com/images/w3schools_green.jpg"></td>
                 <td th:text="${item.name}">Adı</td>
                 <td th:text="${item.color}">Rengi</td>
                 <td th:text="${item.price}">Fiyatı</td>
