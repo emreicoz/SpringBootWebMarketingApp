@@ -15,10 +15,10 @@
 <body>
 <div class="container w-25 bg-light p-3 mt-3 border">
     <h4 class="modal-header">Yeni Ürün Ekle</h4>
-    <form th:action="@{addItem}" th:object="${item}" method="POST">
+    <form th:action="@{addItem}" th:object="${item}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fileImage">Resim</label>
-            <input type="file" th:field="*{image}" name="fileImage" id="fileImage">
+            <input type="file" name="fileImage" id="fileImage">
         </div>
         <div class="form-group">
             <img class="image-preview" id="itemImage" alt="itemImage">
@@ -52,7 +52,6 @@
 
         if (file) {
             const reader = new FileReader();
-
             reader.addEventListener("load", function () {
                 previewImage.setAttribute("src", this.result);
             });

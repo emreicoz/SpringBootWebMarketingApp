@@ -5,11 +5,12 @@ import com.example.springbootwebmarketingapp.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -44,9 +45,24 @@ public class ItemController {
     }
 
     @PostMapping("/addItem")
-    public String addItem(Model model, @ModelAttribute("item") Item c) {
-        itemService.add(c);
+    public String addItem(Model model, @ModelAttribute("item") Item c, @RequestParam("fileImage") MultipartFile multipartFile) {
+        c.setImage(multipartFile.getOriginalFilename());
+        Long savedItemId = itemService.add(c);
+        try {
+            saveImagetoDisk(multipartFile, savedItemId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/allItems/";
+    }
+
+    public void saveImagetoDisk(MultipartFile imageFile, Long id) throws Exception {
+        String folder = "C://Users//emre1//Desktop/SBWAPictures/" + id + '/';
+        byte[] bytes = imageFile.getBytes();
+        Path pathfirst = Paths.get(folder);
+        Path path = Paths.get(folder + imageFile.getOriginalFilename());
+        Files.createDirectories(pathfirst);
+        Files.write(path, bytes);
     }
 
     @RequestMapping("/updateItem/{id}")

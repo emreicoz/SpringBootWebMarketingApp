@@ -41,6 +41,10 @@ public class Item {
         this.image = image;
     }
 
+    public String getImagePath() {
+        return "C:\\Users\\emre1\\Desktop\\SBWAPictures\\" + id + "\\" + image;
+    }
+
     public String getName() {
         return name;
     }
