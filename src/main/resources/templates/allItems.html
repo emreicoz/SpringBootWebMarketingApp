@@ -5,6 +5,12 @@
     <title>Items</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .image-preview {
+            width: 100px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -26,11 +32,13 @@
             <th scope="col">Deneme</th>
             <th scope="col" colspan="2"></th>
         </tr>
+        <img src="C:\Users\emre1\Desktop\cube.jpg" height="108" width="192"/>
         </thead>
             <tbody>
             <tr th:each="item : ${itemList}">
                 <td th:text="${item.id}">Id</td>
-                <td th:text="${item.image}"><img th:src="https://www.w3schools.com/images/w3schools_green.jpg"></td>
+                <td><img class="image-preview" th:src="@{${item.getImagePath}}" id="itemImage"> <label
+                        th:text="${item.getImagePath}"></label></td>
                 <td th:text="${item.name}">Adı</td>
                 <td th:text="${item.color}">Rengi</td>
                 <td th:text="${item.price}">Fiyatı</td>
@@ -44,7 +52,9 @@
                 </td>
             </tr>
             </tbody>
-        </table>
+    </table>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg" width=75px height="75px">
+    <img src="../static/Pictures/cube.jpg" width=75px height="75px">
 </div>
 </body>
 </html>
