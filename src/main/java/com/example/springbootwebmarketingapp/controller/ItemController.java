@@ -57,7 +57,7 @@ public class ItemController {
     }
 
     public void saveImagetoDisk(MultipartFile imageFile, Long id) throws Exception {
-        String folder = "C://Users//emre1//Desktop/SBWAPictures/" + id + '/';
+        String folder = "C:/Users/emre1/IdeaProjects/SpringBootWebMarketingApp/src/main/resources/static/Pictures/" + id + '/';
         byte[] bytes = imageFile.getBytes();
         Path pathfirst = Paths.get(folder);
         Path path = Paths.get(folder + imageFile.getOriginalFilename());

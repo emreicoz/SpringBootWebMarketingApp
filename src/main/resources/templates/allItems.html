@@ -7,8 +7,9 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .image-preview {
-            width: 100px;
-            height: 50px;
+            width: 192px;
+            height: 108px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -32,19 +33,20 @@
             <th scope="col">Deneme</th>
             <th scope="col" colspan="2"></th>
         </tr>
-        <img src="C:\Users\emre1\Desktop\cube.jpg" height="108" width="192"/>
         </thead>
             <tbody>
             <tr th:each="item : ${itemList}">
-                <td th:text="${item.id}">Id</td>
-                <td><img class="image-preview" th:src="@{${item.getImagePath}}" id="itemImage"> <label
-                        th:text="${item.getImagePath}"></label></td>
-                <td th:text="${item.name}">Adı</td>
-                <td th:text="${item.color}">Rengi</td>
-                <td th:text="${item.price}">Fiyatı</td>
-                <td><a class="btn btn-outline-info" th:href="@{/itemDetail/{id}(id=${item.id})}" th:object="${itema}">Detay</a>
+                <td class="align-middle" th:text="${item.id}">Id</td>
+                <td class="align-middle col-1"><img class="image-preview"
+                                                    th:src="@{${'../Pictures/' + item.id + '/' + item.image }}"
+                                                    id="itemImage"></td>
+                <td class="align-middle" th:text="${item.name}">Adı</td>
+                <td class="align-middle" th:text="${item.color}">Rengi</td>
+                <td class="align-middle" th:text="${item.price}">Fiyatı</td>
+                <td class="align-middle"><a class="btn btn-outline-info" th:href="@{/itemDetail/{id}(id=${item.id})}"
+                                            th:object="${itema}">Detay</a>
                 </td>
-                <td>
+                <td class="align-middle">
                     <form th:method="delete" th:action="@{/deleteItem(itemId=${item.id})}">
                         <button class="btn btn-outline-danger"> Sil
                         </button>
@@ -53,8 +55,6 @@
             </tr>
             </tbody>
     </table>
-    <img src="https://www.w3schools.com/images/w3schools_green.jpg" width=75px height="75px">
-    <img src="../static/Pictures/cube.jpg" width=75px height="75px">
 </div>
 </body>
 </html>

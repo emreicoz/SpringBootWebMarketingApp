@@ -5,10 +5,21 @@
     <title th:text="${item.name}">Title</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .image-preview {
+            width: 192px;
+            height: 108px;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
 <div class="container w-25 bg-light border mt-4 p-4">
     <form th:action="@{/updateItem/{id}(id=${item.id})}" th:object="${item}" method="POST">
+        <div class="form-group text-center">
+            <img class="image-preview" th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" id="itemImage">
+        </div>
         <div class="form-group">
             <label for="itemName">Ürün Ad</label>
             <input type="text" th:field="${item.name}" class="form-control" id="itemName"/>

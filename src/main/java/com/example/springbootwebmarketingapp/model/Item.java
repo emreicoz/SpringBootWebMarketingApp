@@ -42,7 +42,7 @@ public class Item {
     }
 
     public String getImagePath() {
-        return "C:\\Users\\emre1\\Desktop\\SBWAPictures\\" + id + "\\" + image;
+        return "C:/Users/emre1/IdeaProjects/SpringBootWebMarketingApp/src/main/resources/static/Pictures/" + id + "/" + image;
     }
 
     public String getName() {
