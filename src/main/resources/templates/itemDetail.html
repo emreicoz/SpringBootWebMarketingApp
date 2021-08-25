@@ -19,6 +19,7 @@
     <form th:action="@{/updateItem/{id}(id=${item.id})}" th:object="${item}" method="POST">
         <div class="form-group text-center">
             <img class="image-preview" th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" id="itemImage">
+            <input class="d-none" type="text" th:field="${item.image}" id="itemImg"/>
         </div>
         <div class="form-group">
             <label for="itemName">Ürün Ad</label>
