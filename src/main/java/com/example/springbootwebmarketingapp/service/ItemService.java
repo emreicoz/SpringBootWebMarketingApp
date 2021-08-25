@@ -19,6 +19,11 @@ public class ItemService implements IItemService {
     }
 
     @Override
+    public List<Item> getBySearchValue(String searchValue) {
+        return (List<Item>) itemRepository.findBySearchValue(searchValue);
+    }
+
+    @Override
     public Item getSingle(Long id) {
         return itemRepository.findById(id).get();
     }

@@ -7,6 +7,8 @@ import java.util.List;
 public interface IItemService {
     List<Item> getAll();
 
+    List<Item> getBySearchValue(String searchValue);
+
     Long add(Item item);
 
     void update(Item item);

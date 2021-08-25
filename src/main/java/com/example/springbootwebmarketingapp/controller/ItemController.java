@@ -24,9 +24,13 @@ public class ItemController {
     }
 
     @GetMapping(value = {"/allItems"})
-    public String allItems(Model model) {
-        List<Item> result = (List<Item>) itemService.getAll();
-        System.out.print(result);
+    public String allItems(Model model, String searchValue) {
+        List<Item> result;
+        if (searchValue != null) {
+            result = itemService.getBySearchValue(searchValue);
+        } else {
+            result = itemService.getAll();
+        }
         model.addAttribute("itemList", result);
         return "allItems";
     }
