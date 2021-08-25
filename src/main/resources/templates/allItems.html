@@ -23,6 +23,11 @@
             <a class="btn btn-outline-dark" href="/home">Ana Sayfa</a>
         </div>
     </div>
+    <form th:action="@{/allItems}" method="get" class="mb-2">
+        <label for="searchValue">Ürün Ara : </label>
+        <input type="text" id="searchValue" name="searchValue"/>
+        <button class="btn btn-outline-primary" type="submit">Ara</button>
+    </form>
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
