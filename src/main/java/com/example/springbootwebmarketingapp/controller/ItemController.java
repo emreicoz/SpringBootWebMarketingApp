@@ -81,4 +81,12 @@ public class ItemController {
         return "redirect:/allItems";
     }
 
+    @GetMapping("/buyItem")
+    public String buyItem(Model model) {
+        List<Item> result;
+        result = itemService.getAll();
+        model.addAttribute("itemList", result);
+        return "buyItem";
+    }
+
 }

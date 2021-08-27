@@ -4,19 +4,15 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1b1e21;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid">
-    <br>
-    <h3 class="modal-header">Market Uygulaması</h3>
-    <div class="container-fluid">
-        <a href="allItems" class="btn btn-outline-primary">Tüm ürünler</a>
-    </div>
-    <br>
-    <div class="container-fluid">
-        <a href="newItem" class="btn btn-outline-primary">Yeni ürün ekle</a>
-    </div>
-    <br>
-</div>
+<div th:replace="navigation :: navbar "></div>
+
 </body>
 </html>

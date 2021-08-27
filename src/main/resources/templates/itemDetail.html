@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+<div th:replace="navigation :: navbar "></div>
 <div class="container w-25 bg-light border mt-4 p-4">
     <form th:action="@{/updateItem/{id}(id=${item.id})}" th:object="${item}" method="POST">
         <div class="form-group text-center">
