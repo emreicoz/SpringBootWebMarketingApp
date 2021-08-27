@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .image-preview {
+            width: 230px;
+            height: 129px;
+            object-fit: contain;
+        }
+
+        .custom-card {
+            border-radius: 50px;
+            width: 24%;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="navigation :: navbar "></div>
+<div class="container-fluid p-2 border">
+    <div class="row px-2">
+        <div class="card custom-card p-2 align-items-center m-1" th:each="item : ${itemList}">
+            <img class="card-img-top image-preview mt-2 " src="../static/Pictures/cube.jpg"
+                 th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${item.name}">Card title</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="${item.color}">Cras justo odio</li>
+                <li class="list-group-item h6" th:text="${item.price} +' ₺'">Dapibus ac facilisis in</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link btn btn-outline-success">Sepete Ekle</a>
+                <a href="#" class="card-link"></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

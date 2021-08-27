@@ -13,6 +13,7 @@
     </style>
 </head>
 <body>
+<div th:replace="navigation :: navbar "></div>
 <div class="container w-25 bg-light p-3 mt-3 border">
     <h4 class="modal-header">Yeni Ürün Ekle</h4>
     <form th:action="@{addItem}" th:object="${item}" method="POST" enctype="multipart/form-data">

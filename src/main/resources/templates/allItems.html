@@ -12,21 +12,15 @@
             object-fit: contain;
         }
     </style>
+
 </head>
 <body>
-<div class="container-fluid">
-    <div class="container-fluid d-flex modal-header mb-3 ">
-        <div>
-            <h3>Tüm Ürünler</h3>
-        </div>
-        <div class="float-right">
-            <a class="btn btn-outline-dark" href="/home">Ana Sayfa</a>
-        </div>
-    </div>
-    <form th:action="@{/allItems}" method="get" class="mb-2">
-        <label for="searchValue">Ürün Ara : </label>
-        <input type="text" id="searchValue" name="searchValue"/>
-        <button class="btn btn-outline-primary" type="submit">Ara</button>
+<div th:replace="navigation :: navbar "></div>
+<div class="container-fluid p-2">
+    <form th:action="@{/allItems}" method="get" class="mb-2 form-inline">
+        <input class="form-control ml-2" type="search" placeholder="Ürün Ara" id="searchValue" aria-label="Search"
+               name="searchValue"/>
+        <button class="btn btn-outline-primary ml-2" type="submit">Ara</button>
     </form>
     <table class="table table-hover table-bordered">
         <thead>
@@ -39,26 +33,26 @@
             <th scope="col" colspan="2"></th>
         </tr>
         </thead>
-            <tbody>
-            <tr th:each="item : ${itemList}">
-                <td class="align-middle" th:text="${item.id}">Id</td>
-                <td class="align-middle col-1"><img class="image-preview"
-                                                    th:src="@{${'../Pictures/' + item.id + '/' + item.image }}"
-                                                    id="itemImage"></td>
-                <td class="align-middle" th:text="${item.name}">Adı</td>
-                <td class="align-middle" th:text="${item.color}">Rengi</td>
-                <td class="align-middle" th:text="${item.price}">Fiyatı</td>
-                <td class="align-middle"><a class="btn btn-outline-info" th:href="@{/itemDetail/{id}(id=${item.id})}"
-                                            th:object="${itema}">Detay</a>
-                </td>
-                <td class="align-middle">
-                    <form th:method="delete" th:action="@{/deleteItem(itemId=${item.id})}">
-                        <button class="btn btn-outline-danger"> Sil
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
+        <tbody>
+        <tr th:each="item : ${itemList}">
+            <td class="align-middle" th:text="${item.id}">Id</td>
+            <td class="align-middle col-1"><img class="image-preview"
+                                                th:src="@{${'../Pictures/' + item.id + '/' + item.image }}"
+                                                id="itemImage"></td>
+            <td class="align-middle" th:text="${item.name}">Adı</td>
+            <td class="align-middle" th:text="${item.color}">Rengi</td>
+            <td class="align-middle" th:text="${item.price} + ' ₺'">Fiyatı</td>
+            <td class="align-middle"><a class="btn btn-outline-info" th:href="@{/itemDetail/{id}(id=${item.id})}"
+                                        th:object="${itema}">Detay</a>
+            </td>
+            <td class="align-middle">
+                <form th:method="delete" th:action="@{/deleteItem(itemId=${item.id})}">
+                    <button class="btn btn-outline-danger"> Sil
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </div>
 </body>
