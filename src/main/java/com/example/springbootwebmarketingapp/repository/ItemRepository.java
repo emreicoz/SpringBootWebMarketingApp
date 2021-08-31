@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
-    @Query(value = "select * from items i where i.name ilike %:searchValue% ", nativeQuery = true)
+    @Query(value = "select * from items i where i.name ilike %:searchValue%  order by i.id asc", nativeQuery = true)
     List<Item> findBySearchValue(@Param("searchValue") String searchValue);
 
 }

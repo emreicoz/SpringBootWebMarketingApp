@@ -29,13 +29,13 @@ public class ItemController {
         if (searchValue != null) {
             result = itemService.getBySearchValue(searchValue);
         } else {
-            result = itemService.getAll();
+            result = itemService.getBySearchValue("");
         }
         model.addAttribute("itemList", result);
         return "allItems";
     }
 
-    @GetMapping("itemDetail/{id}")
+    @GetMapping("itemDetail")
     public String itemDetail(Model model, @ModelAttribute("") Item i) {
         Item item = itemService.getSingle(i.getId());
         model.addAttribute("item", item);
@@ -57,7 +57,7 @@ public class ItemController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/allItems/";
+        return "redirect:/allItems";
     }
 
     public void saveImagetoDisk(MultipartFile imageFile, Long id) throws Exception {
@@ -72,7 +72,7 @@ public class ItemController {
     @RequestMapping("/updateItem/{id}")
     public String updateItem(Model model, @ModelAttribute("item") Item i) {
         itemService.update(i);
-        return "redirect:/allItems/";
+        return "redirect:/allItems";
     }
 
     @PostMapping("/deleteItem")
