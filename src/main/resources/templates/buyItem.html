@@ -7,14 +7,18 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .image-preview {
-            width: 230px;
-            height: 129px;
+            width: 80%;
+            height: 50%;
             object-fit: contain;
         }
 
         .custom-card {
-            border-radius: 50px;
+            border-radius: 10px;
             width: 24%;
+        }
+
+        .custom-card:hover {
+            cursor: pointer;
         }
 
         .grow {
@@ -22,30 +26,67 @@
         }
 
         .grow:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
+        }
+
+        .cart-button {
+            top: 1%;
+            right: 1%;
+            position: fixed;
         }
     </style>
 </head>
 <body>
 <div th:replace="navigation :: navbar "></div>
-<div class="container-fluid p-2 border">
-    <div class="row px-2">
-        <div class="card custom-card p-2 align-items-center m-1" th:each="item : ${itemList}">
-            <img class="card-img-top image-preview mt-2 grow " src="../static/Pictures/cube.jpg"
-                 th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${item.name}">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush align-items-center">
-                <li class="list-group-item" th:text="${item.color}">Cras justo odio</li>
-                <li class="list-group-item h6" th:text="${item.price} +' ₺'">Dapibus ac facilisis in</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link btn btn-outline-success">Sepete Ekle</a>
-                <a href="#" class="card-link"></a>
+<div class="container-fluid">
+    <div class="container p-2">
+        <button class="btn btn-warning text-light cart-button" id="cartButton">Sepetim</button>
+        <div class="row justify-content-center">
+            <div class="card custom-card p-2 align-items-center m-1" th:each="item : ${itemList}">
+                <img class="card-img-top image-preview mt-2 grow " src="../static/Pictures/53/Kulaklık.jpg"
+                     th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${item.name}">Ürün Adı</h5>
+                </div>
+                <ul class="list-group list-group-flush align-items-center">
+                    <li class="list-group-item" th:text="${item.color}">Ürün Renk</li>
+                    <li class="list-group-item h6" th:text="${item.price} +' ₺'">Ürün Fiyat</li>
+                </ul>
+                <div class="card-body">
+                    <button th:attr="onclick=|addToCart('${item.id}')|" class="card-link btn btn-outline-success">Sepete
+                        Ekle
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    const cartButton = document.getElementById("cartButton");
+    let cartButtontext = cartButton.innerText;
+    let count = 0;
+    /*<![CDATA[*/
+    let itemList = /*[[${itemList}]]*/ "Test";
+    let item;
+    let cart = [];
+
+    /*]]>*/
+    function addToCart(itemId) {
+        console.log("Eklendi");
+        console.log(itemId);
+        console.log(itemList);
+        for (var i = 0; i < itemList.length; i++) {
+            if (itemList[i].id == itemId) {
+                item = itemList[i];
+            }
+        }
+        cart.push(item);
+        console.log(cart);
+        cartButton.innerText = (cartButtontext + " " + cart.length);
+    }
+
+
+</script>
 </body>
 </html>
