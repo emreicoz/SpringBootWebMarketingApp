@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Items</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .image-preview {
@@ -30,20 +31,68 @@
         }
 
         .cart-button {
-            top: 1%;
-            right: 1%;
+            width: 50px;
+            height: 50px;
+            top: 2%;
+            right: 2%;
             position: fixed;
+            /*transition: transform 250ms;*/
+            transition: width 1s;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+            background-color: #fd7e14;
+        }
+
+        .cart-button:hover {
+            /*transform: translateY(-10px);*/
+            height: 50px;
+            width: 130px;
+        }
+
+        .cart-button:hover #cart-text {
+            visibility: visible;
+            transition: visibility 0.5s linear, opacity 1s ease-in;
+            opacity: 1;
+        }
+
+
+        #cart-text {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s linear, opacity 0.3s linear;
+            margin-right: 25px;
+            display: block;
+            position: sticky;
+            padding-right: 5px;
+        }
+
+        #cart-size {
+            display: block;
+            position: fixed;
+            top: 3.5%;
+            right: 3.7%;
+        }
+
+        .cart-icon {
+            display: block;
+            position: fixed;
+            top: 3%;
+            right: 2.4%;
         }
     </style>
 </head>
 <body>
 <div th:replace="navigation :: navbar "></div>
 <div class="container-fluid">
-    <div class="container p-2">
-        <button class="btn btn-warning text-light cart-button" id="cartButton">Sepetim</button>
+    <div class="container p-2 ">
+        <button class="btn text-light cart-button" id="cartButton" data-toggle="modal"
+                data-target="#cartModal">
+            <span id="cart-text" class="">Sepetim</span>
+            <span id="cart-size">0</span>
+            <i class="bi bi-cart4 cart-icon " style="font-size: 20px"></i>
+        </button>
         <div class="row justify-content-center">
             <div class="card custom-card p-2 align-items-center m-1" th:each="item : ${itemList}">
-                <img class="card-img-top image-preview mt-2 grow " src="../static/Pictures/53/Kulaklık.jpg"
+                <img class="card-img-top image-preview mt-2 grow "
                      th:src="@{${'../Pictures/' + item.id + '/' + item.image }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${item.name}">Ürün Adı</h5>
@@ -53,8 +102,8 @@
                     <li class="list-group-item h6" th:text="${item.price} +' ₺'">Ürün Fiyat</li>
                 </ul>
                 <div class="card-body">
-                    <button th:attr="onclick=|addToCart('${item.id}')|" class="card-link btn btn-outline-success">Sepete
-                        Ekle
+                    <button th:attr="onclick=|addToCart('${item.id}')|" class="card-link btn btn-outline-success">
+                        Sepete Ekle
                     </button>
                 </div>
             </div>
@@ -62,14 +111,60 @@
     </div>
 </div>
 
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Sepetteki Ürünler</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-center justify-content-around text-center mb-2">
+                    <div class="col-3">
+                        Resim
+                    </div>
+                    <div class="col-2">
+                        Ad
+                    </div>
+                    <div class="col-2">
+                        Renk
+                    </div>
+                    <div class="col-2">
+                        Fiyat
+                    </div>
+                    <div class="col-1">
+                        Adet
+                    </div>
+                    <div class="col-2">
+                        <span>Ürün Toplam</span>
+                    </div>
+                </div>
+                <div id="cart-deck" class="p-2">
+                </div>
+                <span id="total-price" class="col-2 float-right text-center"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success">Alışverişi Tamamla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script th:inline="javascript">
     const cartButton = document.getElementById("cartButton");
-    let cartButtontext = cartButton.innerText;
-    let count = 0;
+    const cartSize = document.getElementById("cart-size");
+    const cartDeck = document.getElementById("cart-deck");
+    const totalPrice = document.getElementById("total-price");
+
+    let cartButtontext = cartButton.innerHTML;
     /*<![CDATA[*/
     let itemList = /*[[${itemList}]]*/ "Test";
     let item;
     let cart = [];
+    let price = 0;
 
     /*]]>*/
     function addToCart(itemId) {
@@ -82,11 +177,46 @@
             }
         }
         cart.push(item);
+        price += item.price;
         console.log(cart);
-        cartButton.innerText = (cartButtontext + " " + cart.length);
+        cartSize.innerText = cart.length;
+        totalPrice.innerText = "Toplam Tutar: " + price + " TL";
+
+        const cartItem = document.createElement("div");
+        cartItem.innerHTML = "<div class=\"col-3\">\n" +
+            "                            <img class=\"border img-fluid border-0 m-2\" src=\"../Pictures/" + item.id + "/" + item.image + "\">\n" +
+            "                        </div>\n" +
+            "                        <div id=\"cart-item-name\" class=\"col-2\">\n" +
+            "                            " + item.name + "\n" +
+            "                        </div>\n" +
+            "                        <div class=\"col-2\">\n" +
+            "                            " + item.color + "\n" +
+            "                        </div>\n" +
+            "                        <div class=\"col-2\">\n" +
+            "                            " + item.price + " TL\n" +
+            "                        </div>\n" +
+            "                        <div class=\"col-1\">\n" +
+            "                            1\n" +
+            "                        </div>\n" +
+            "                        <div class=\"col-2\">\n" +
+            "                            " + item.price + " TL\n" +
+            "                        </div>";
+        cartItem.id = item.id;
+        cartItem.className = "row align-items-center justify-content-around text-center border rounded"
+        cartDeck.append(cartItem);
+
+
     }
 
-
 </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
