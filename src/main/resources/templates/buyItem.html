@@ -180,7 +180,7 @@
         price += item.price;
         console.log(cart);
         cartSize.innerText = cart.length;
-        totalPrice.innerText = "Toplam Tutar: " + price + " TL";
+        totalPrice.innerText = "Toplam Tutar: " + price + " ₺";
 
         const cartItem = document.createElement("div");
         cartItem.innerHTML = "<div class=\"col-3\">\n" +
@@ -193,13 +193,13 @@
             "                            " + item.color + "\n" +
             "                        </div>\n" +
             "                        <div class=\"col-2\">\n" +
-            "                            " + item.price + " TL\n" +
+            "                            " + item.price + " ₺\n" +
             "                        </div>\n" +
             "                        <div class=\"col-1\">\n" +
             "                            1\n" +
             "                        </div>\n" +
             "                        <div class=\"col-2\">\n" +
-            "                            " + item.price + " TL\n" +
+            "                            " + item.price + " ₺\n" +
             "                        </div>";
         cartItem.id = item.id;
         cartItem.className = "row align-items-center justify-content-around text-center border rounded"
