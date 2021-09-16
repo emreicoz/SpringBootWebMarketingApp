@@ -1,6 +1,7 @@
 package com.example.springbootwebmarketingapp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -13,6 +14,9 @@ public class Item {
     private String name;
     private String color;
     private Integer price;
+
+    @ManyToMany(targetEntity = User.class, mappedBy = "items", cascade = CascadeType.ALL)
+    List<User> users;
 
     public Item() {
     }
