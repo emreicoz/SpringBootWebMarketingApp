@@ -10,13 +10,21 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 50)
     private String image;
+
+    @Column(length = 25)
     private String name;
+
+    @Column(length = 25)
     private String color;
+
+    @Column()
     private Integer price;
 
-    @ManyToMany(targetEntity = User.class, mappedBy = "items", cascade = CascadeType.ALL)
-    List<User> users;
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Item() {
     }

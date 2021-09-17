@@ -1,22 +1,38 @@
 package com.example.springbootwebmarketingapp.model;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@EnableAutoConfiguration
 @Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 25)
     private String name;
+
+    @Column(length = 25)
     private String surname;
+
+    @Column(length = 255, unique = true)
     private String email;
+
+    @Column(length = 16)
     private String password;
 
-    @ManyToMany(targetEntity = Item.class, cascade = CascadeType.ALL)
-    List<Item> items;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_items", schema = "",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
+    private List<Item> items;
 
     public User() {
     }

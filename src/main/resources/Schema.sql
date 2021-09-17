@@ -1,4 +1,4 @@
-CREATE TABLE items
+/*CREATE TABLE items
 (
     id    serial PRIMARY KEY,
     image varchar(50),
@@ -16,4 +16,6 @@ CREATE TABLE users
     email    varchar(255),
     password varchar(25)
 );
+*/
 
+DROP TABLE users
