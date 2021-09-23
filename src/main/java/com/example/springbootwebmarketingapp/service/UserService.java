@@ -28,16 +28,23 @@ public class UserService implements IUserService {
 
     @Override
     public void update(User user) {
-
+        userRepository.save(user);
     }
 
     @Override
     public void delete(Long id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override
     public User getSingle(Long id) {
-        return null;
+        User user = userRepository.findById(id).get();
+        return user;
+    }
+
+    @Override
+    public Object getByLoginInfo(String userName, String password) {
+        Object user = userRepository.findByLoginInfo(userName, password);
+        return user;
     }
 }
