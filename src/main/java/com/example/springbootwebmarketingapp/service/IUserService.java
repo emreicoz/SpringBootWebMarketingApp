@@ -15,4 +15,5 @@ public interface IUserService {
 
     User getSingle(Long id);
 
+    Object getByLoginInfo(String email, String password);
 }
