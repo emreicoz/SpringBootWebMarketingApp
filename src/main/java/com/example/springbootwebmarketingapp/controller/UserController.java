@@ -42,15 +42,18 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("userLogin") Object user) {
-        /*try{
-            userService.getByLoginInfo(user.email, user.password);
-        }catch (Error error){
+    public String login(@ModelAttribute("userLogin") User user) {
+        try {
+            Boolean userExists = userService.getByLoginInfo(user.getEmail(), user.getPassword());
+            if (userExists) {
+                System.out.println("User succesfully logged in : " + user.getEmail());
+            } else {
+                System.out.println("User doesn't exists");
+            }
+        } catch (Error error) {
             System.out.println(error);
         }
-
-         */
-        return "Logged in";
+        return "Loggedin";
     }
 
 
