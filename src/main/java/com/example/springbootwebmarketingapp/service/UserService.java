@@ -43,8 +43,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Object getByLoginInfo(String userName, String password) {
+    public Boolean getByLoginInfo(String userName, String password) {
         Object user = userRepository.findByLoginInfo(userName, password);
-        return user;
+        Boolean userExists = false;
+        if (user != null) {
+            userExists = true;
+        }
+        return userExists;
     }
 }
